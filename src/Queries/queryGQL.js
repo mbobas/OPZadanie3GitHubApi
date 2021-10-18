@@ -15,9 +15,10 @@ export const queryGQL = gql`
             name
             owner {
               login
+              avatarUrl
             }
             description
-            
+            url
             stargazers {
               totalCount
             }

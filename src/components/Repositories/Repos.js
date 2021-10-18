@@ -5,9 +5,10 @@ const SerachbarWrapperStyled = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  //border: 1px solid green;
   width: 60vw;
-  //border: 1px solid red;
+  @media only screen and (max-width: 850px) {
+    width: 90vw;
+}
 `;
 
 const OneItemWrapperStyled = styled.div`
@@ -21,22 +22,54 @@ const OneItemWrapperStyled = styled.div`
 
 const TextNameStyled = styled.h3`
   color: ${({theme}) => theme.white};
-  //font-size: 1rem;
-
+  &:hover {
+    color:  ${({theme}) => theme.yellow};
+  }
 `;
 
 const TextDescriptionStyled = styled.p`
-  color: ${({theme}) => theme.white};
-  //font-size: 1rem;
+    color: ${({theme}) => theme.white};
 `;
 
-const TextStarsStyled = styled.p`
-  color: ${({theme}) => theme.white};
-  //font-size: 1rem;
+const TextStarsStyled = styled.div`
+    color: ${({theme}) => theme.white};
+  `;
+
+const StarStyled = styled.div`
+    margin-right: 10px;
+    color: ${({theme}) => theme.yellow};
+  `;
+
+const LinkName = styled.a`
+    &:link {
+    color:  ${({theme}) => theme.white};
+  }
+    &:hover {
+    color:  ${({theme}) => theme.yellow};
+  }
+text-decoration: none;
 `;
 
+const StarAndTextWrapper = styled.div`
+  display: flex;
+  flex-direction: row ;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  height: 1vw;
+  border: 1px solid ${({theme}) => theme.darkgray};
+  border-radius: 10px;
+  background-color: ${({theme}) => theme.darkgray2};
+  color: white;
+  max-width: 80px;
+  margin-right: 1vw;
+`;
 
-
+const LinkAndStarsWrapper = styled.div`
+  display:flex;
+  flex-direction: row;
+  justify-content: space-between;
+`;
 
 class Repos extends Component {
   componentDidMount() {
@@ -54,24 +87,30 @@ class Repos extends Component {
   };
 
   render() {
-     if (!this.props.entries && this.props.loading) return <p>Loading....</p>;
+     if (!this.props.entries && this.props.loading) return <TextNameStyled>Loading....</TextNameStyled>;
     const repos = this.props.entries.edges || [];
     return (
       <SerachbarWrapperStyled>
         {repos.map(({ node }, idx) => (
           <OneItemWrapperStyled key={idx}>
-            <TextNameStyled>
-              {node.name} - {node.owner.login}
-            </TextNameStyled>
+
+           <LinkAndStarsWrapper>
+              <LinkName href={node.url} rel="noreferrer" target="_blank">
+                <TextNameStyled>
+                  {node.name} - {node.owner.login}
+                </TextNameStyled>
+              </LinkName>
+              <StarAndTextWrapper>
+                <StarStyled>★</StarStyled>
+                <TextStarsStyled>{node.stargazers.totalCount}</TextStarsStyled>
+              </StarAndTextWrapper>
+            </LinkAndStarsWrapper>
+
             <TextDescriptionStyled>{node.description}</TextDescriptionStyled>
-            <TextStarsStyled>
-              ★ {node.stargazers.totalCount} -{" "}
-              {node.primaryLanguage && node.primaryLanguage.name}{" "}
-              
-            </TextStarsStyled>
+            <TextStarsStyled>{node.primaryLanguage && node.primaryLanguage.name}{" "}</TextStarsStyled>
           </OneItemWrapperStyled>
         ))}
-        {this.props.loading && <h2>Loading...</h2>}
+        {this.props.loading && <TextNameStyled>Loading...</TextNameStyled>}
       </SerachbarWrapperStyled>
     );
   }

@@ -1,6 +1,7 @@
 import React, { useState, useRef } from "react";
 import styled from "styled-components";
 import ReposWrapper from "../Repositories/ReposWrapper";
+import Welcome from './../Avatar/Welcome';
 
 const SerachbarWrapperStyled = styled.div`
   display: flex;
@@ -8,7 +9,7 @@ const SerachbarWrapperStyled = styled.div`
   align-items: center;
   margin-top: 8rem;
   min-height: 11rem;
- // border: 1px solid red;
+  background-color: #010409;
 `;
 
 const ResultsWrapperStyled = styled.div`
@@ -16,7 +17,6 @@ const ResultsWrapperStyled = styled.div`
   justify-content: center;
   align-items: center;
   margin-top: 2rem;
-  //border: 1px solid red;
 `;
 
 const Form = styled.form`
@@ -24,19 +24,15 @@ const Form = styled.form`
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
-  //background-color: #37474f;
+  box-shadow: 0 5px 8px rgba(255, 255, 255, 0.3);
   background-color: #0D1117;
-  /* Change width of the form depending if the bar is opened or not */
   width: ${props => (props.barOpened ? "50rem" : "2rem")};
-  /* If bar opened, normal cursor on the whole form. If closed, show pointer on the whole form so user knows he can click to open it */
   cursor: ${props => (props.barOpened ? "auto" : "pointer")};
   padding: ${props => (props.barOpened ? "2rem" : "4rem")};
   height: 2rem;
   border-radius: 10rem;
   transition: width 1000ms cubic-bezier(0.645, 0.045, 0.355, 1.3);
   transition: padding 1000ms cubic-bezier(0.645, 0.045, 0.355, 1.3);
- 
 `;
 
 const Input = styled.input`
@@ -48,7 +44,6 @@ const Input = styled.input`
   border: none;
   color: white;
   transition: margin 300ms cubic-bezier(0.645, 0.045, 0.355, 1);
-  
   &:focus,
   &:active {
     outline: none;
@@ -82,29 +77,26 @@ export default function SearchBar({ children }) {
 
   return (
     <div>
+      <Welcome />  
       <SerachbarWrapperStyled>
       <Form
         barOpened={barOpened}
         onClick={() => {
-          // When form clicked, set state of baropened to true and focus the input
           setBarOpened(true);
           inputFocus.current.focus();
         }}
-        // on focus open search bar
         onFocus={() => {
           setBarOpened(true);
           inputFocus.current.focus();
         }}
-        // on blur close search bar
         onBlur={() => {
           setBarOpened(false);
         }}
-        // On submit, call the onFormSubmit function
         onSubmit={onFormSubmit}
         ref={formRef}
       >
         <Button type="submit" barOpened={barOpened}>
-          Click Search Engine
+          Start Search
         </Button>
         <Input
           onChange={e => setInput(e.target.value)}
@@ -116,7 +108,7 @@ export default function SearchBar({ children }) {
       </Form>
       </SerachbarWrapperStyled>
       <ResultsWrapperStyled>
-      {input.length >2 ? <ReposWrapper input={input} /> : <div>Put minimum 3 characters</div>}
+      {input.length >2 ? <ReposWrapper input={input} /> : <div></div>}
       </ResultsWrapperStyled>
     </div>
   );
