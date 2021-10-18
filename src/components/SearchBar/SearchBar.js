@@ -8,7 +8,7 @@ const SerachbarWrapperStyled = styled.div`
   align-items: center;
   margin-top: 8rem;
   min-height: 11rem;
-  border: 1px solid red;
+ // border: 1px solid red;
 `;
 
 const ResultsWrapperStyled = styled.div`
@@ -16,6 +16,7 @@ const ResultsWrapperStyled = styled.div`
   justify-content: center;
   align-items: center;
   margin-top: 2rem;
+  //border: 1px solid red;
 `;
 
 const Form = styled.form`
@@ -24,7 +25,8 @@ const Form = styled.form`
   align-items: center;
   justify-content: center;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
-  background-color: #37474f;
+  //background-color: #37474f;
+  background-color: #0D1117;
   /* Change width of the form depending if the bar is opened or not */
   width: ${props => (props.barOpened ? "50rem" : "2rem")};
   /* If bar opened, normal cursor on the whole form. If closed, show pointer on the whole form so user knows he can click to open it */
@@ -102,7 +104,7 @@ export default function SearchBar({ children }) {
         ref={formRef}
       >
         <Button type="submit" barOpened={barOpened}>
-          Repo SearchEngine
+          Click Search Engine
         </Button>
         <Input
           onChange={e => setInput(e.target.value)}

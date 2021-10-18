@@ -1,4 +1,41 @@
 import React, { Component } from "react";
+import styled from "styled-components";
+
+const SerachbarWrapperStyled = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  //border: 1px solid green;
+  width: 60vw;
+  //border: 1px solid red;
+`;
+
+const OneItemWrapperStyled = styled.div`
+  border: 2px solid ${({theme}) => theme.darkgray2};
+  margin: 10px;
+  border-radius: 10px;
+  padding: 16px;
+  background-color: ${({theme}) => theme.lightblack};
+  color: white;
+`;
+
+const TextNameStyled = styled.h3`
+  color: ${({theme}) => theme.white};
+  //font-size: 1rem;
+
+`;
+
+const TextDescriptionStyled = styled.p`
+  color: ${({theme}) => theme.white};
+  //font-size: 1rem;
+`;
+
+const TextStarsStyled = styled.p`
+  color: ${({theme}) => theme.white};
+  //font-size: 1rem;
+`;
+
+
 
 
 class Repos extends Component {
@@ -17,24 +54,25 @@ class Repos extends Component {
   };
 
   render() {
-    if (!this.props.entries && this.props.loading) return <p>Loading....</p>;
+     if (!this.props.entries && this.props.loading) return <p>Loading....</p>;
     const repos = this.props.entries.edges || [];
     return (
-      <ul>
+      <SerachbarWrapperStyled>
         {repos.map(({ node }, idx) => (
-          <li key={idx}>
-            <h3>
+          <OneItemWrapperStyled key={idx}>
+            <TextNameStyled>
               {node.name} - {node.owner.login}
-            </h3>
-            <p>{node.description}</p>
-            <p>
+            </TextNameStyled>
+            <TextDescriptionStyled>{node.description}</TextDescriptionStyled>
+            <TextStarsStyled>
               ★ {node.stargazers.totalCount} -{" "}
               {node.primaryLanguage && node.primaryLanguage.name}{" "}
-            </p>
-          </li>
+              
+            </TextStarsStyled>
+          </OneItemWrapperStyled>
         ))}
         {this.props.loading && <h2>Loading...</h2>}
-      </ul>
+      </SerachbarWrapperStyled>
     );
   }
 }

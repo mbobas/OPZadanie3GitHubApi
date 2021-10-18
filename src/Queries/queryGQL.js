@@ -17,6 +17,7 @@ export const queryGQL = gql`
               login
             }
             description
+            
             stargazers {
               totalCount
             }

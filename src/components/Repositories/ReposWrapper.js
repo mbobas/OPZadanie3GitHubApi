@@ -5,10 +5,26 @@ import { queryGQL } from "./../../Queries/queryGQL";
 import styled from "styled-components";
 
 const ReposWprapperStyled = styled.div`
+  position:relative;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   margin-top: 1rem;
+`;
+
+const QueryWrapperStyled = styled.div`
+  position:relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 1rem;
+`;
+
+const TextHeaderStyled = styled.p`
+  color: ${({theme}) => theme.white};
+  font-size: 2rem;
 `;
 
 
@@ -18,7 +34,8 @@ class ReposWrapper extends Component {
     return (
       <ReposWprapperStyled>
         
-        <h1>The best repositories from all GitHub</h1>
+        <TextHeaderStyled>The best repositories from GitHub</TextHeaderStyled>
+        <QueryWrapperStyled>
         <Query
           notifyOnNetworkStatusChange={true}
           query={queryGQL}
@@ -59,6 +76,7 @@ class ReposWrapper extends Component {
             );
           }}
         </Query>
+        </QueryWrapperStyled>
       </ReposWprapperStyled>
     );
   }
