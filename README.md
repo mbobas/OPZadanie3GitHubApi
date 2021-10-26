@@ -12,4 +12,4 @@ export default ENV;
 ![image](https://user-images.githubusercontent.com/25160664/137750498-bc92ecc6-61df-4411-8ff0-a739b441b5fd.png)
 
 
-To get a GitHub Key log in to your account adn click DeveloperSettings. 
+To get a GitHub Key log in to your account and click DeveloperSettings. 
